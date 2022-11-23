@@ -1,0 +1,282 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;600;700;800;900&display=swap");
+
+:root {
+	--light: white;
+	--gradient: linear-gradient(to right, #0ad8b6, #1991dd);
+	--primary: #1991dd;
+}
+
+* {
+	margin: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: "Nunito Sans", sans-serif;
+	height: 100vh;
+	display: grid;
+	justify-items: center;
+	align-content: start;
+	padding: 50px;
+}
+
+.title {
+	font-size: 40px;
+	text-transform: uppercase;
+	margin-bottom: 20px;
+}
+
+.desc {
+	font-size: 24px;
+	max-width: 1000px;
+	text-align: center;
+	margin-bottom: 100px;
+}
+
+/* Roadmap*/
+.roadmap {
+	--gap: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+	position: relative;
+	width: 100%;
+	padding: 0 var(--gap);
+}
+.step {
+	--circle: 250px;
+	--gradient: linear-gradient(to right, #82d772, #37cd8a);
+	--gradientConnect: linear-gradient(to top, #42ce87, #1991dd);
+	--gradientConnectTop: linear-gradient(to right, #37cd8a, #1991dd);
+	--gradientConnectBottom: linear-gradient(to right, #0ad8b6, #1991dd);
+	display: grid;
+	justify-items: center;
+	position: relative;
+	margin: 0 calc(var(--gap) * -1);
+}
+.step__line {
+	--connect: 50px;
+	--radius: 30px;
+	position: absolute;
+	top: 5px;
+	right: 0;
+	width: var(--radius);
+	height: var(--connect);
+	background: var(--gradientConnect);
+	transform: rotate(45deg);
+	z-index: -1;
+}
+
+.step__line::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: var(--gradientConnect);
+}
+
+.step__line-top,
+.step__line-bottom {
+	/* --size: 50px; */
+	left: 50%;
+	transform: translateX(-50%) rotate(180deg);
+	position: absolute;
+	width: calc(var(--connect) * 1.1);
+	height: calc(var(--connect) / 1.7);
+	background: var(--gradientConnectTop);
+}
+.step__line-bottom {
+	background: var(--gradientConnectBottom);
+}
+
+.step__line-top::after,
+.step__line-top::before,
+.step__line-bottom::after,
+.step__line-bottom::before {
+	content: "";
+	position: absolute;
+	width: var(--radius);
+	height: var(--radius);
+	border-radius: var(--radius);
+	background: var(--light);
+}
+
+.step__line-top::before {
+	top: -14px;
+	left: -18px;
+}
+.step__line-top::after {
+	top: -16px;
+	right: -18px;
+}
+
+.step__line-bottom::before {
+	bottom: -12px;
+	left: -18px;
+}
+.step__line-bottom:after {
+	bottom: -13px;
+	right: -18px;
+}
+
+.step__line-top {
+	top: calc(var(--connect) / -4);
+}
+.step__line-bottom {
+	bottom: calc(var(--connect) / -4);
+}
+
+.step__line::before,
+.step__line::after {
+}
+
+.step__line::before {
+	top: calc(var(--size) * -0.7);
+}
+
+.step__line::after {
+	bottom: calc(var(--size) * -0.7);
+}
+.step__info {
+	width: var(--circle);
+	height: var(--circle);
+	border-radius: var(--circle);
+	position: relative;
+	overflow: hidden;
+	display: grid;
+	padding: 40px;
+	align-content: center;
+	justify-content: center;
+	text-align: center;
+}
+
+.step__info::before,
+.step__info::after {
+	--offset: 0;
+	content: "";
+	position: absolute;
+	top: var(--offset);
+	bottom: var(--offset);
+	left: var(--offset);
+	right: var(--offset);
+	background: var(--gradient);
+	z-index: -1;
+}
+
+.step__info::after {
+	--offset: 25px;
+	border-radius: 100vw;
+	background: #fff;
+}
+
+.step__title {
+	text-transform: uppercase;
+	font-size: 28px;
+	font-weight: 800;
+}
+.step__desc {
+	font-size: 18px;
+	color: #777;
+}
+.step__point {
+	--size: 50px;
+	width: var(--size);
+	height: var(--size);
+	border-radius: var(--size);
+	border: 8px solid var(--point);
+	margin-top: 30px;
+	margin-bottom: calc(var(--size) / -2);
+	background: #fff;
+	position: relative;
+}
+
+.step__point::before {
+	--line: 100px;
+	content: "";
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	height: var(--line);
+	border-left: 2px dashed var(--point);
+	z-index: -2;
+	bottom: 0;
+}
+
+.step__point::after {
+	content: attr(data-year);
+	position: absolute;
+	bottom: -40px;
+	left: 50%;
+	transform: translateX(-50%);
+	color: #777;
+}
+
+/* Odd */
+.step:nth-child(odd) .step__info {
+	margin-bottom: 200px;
+}
+
+.step:nth-child(odd) .step__point::before {
+	--line: 300px;
+}
+
+.step:nth-child(odd) .step__line {
+	top: calc(var(--circle) - var(--connect) - 5px);
+	transform: rotate(-45deg);
+}
+
+.step:last-child .step__line {
+	display: none;
+}
+
+.timeline {
+	--height: 20px;
+	position: absolute;
+	bottom: calc(var(--height) / -2);
+	left: 10px;
+	right: 0;
+	height: var(--height);
+	border-radius: 100vw;
+	background: var(--gradient);
+}
+
+/* Roadmap Gradient */
+.step:nth-child(2) {
+	--gradient: linear-gradient(to right, #82d772, #37cd8a);
+	--gradientConnect: linear-gradient(to right top, #43ce82, #3acd8f);
+	--gradientConnectBottom: #43ce82;
+	--gradientConnectTop: #34ce88;
+	--point: #99d561;
+}
+
+.step:nth-child(3) {
+	--gradient: linear-gradient(to right, #49ce8b, #01c89e);
+	--gradientConnect: linear-gradient(to right bottom, #0ac99c, #0cc6a0);
+	--gradientConnectBottom: #0cc6a0;
+	--gradientConnectTop: #0ac99c;
+	--point: #5be2bd;
+}
+
+.step:nth-child(4) {
+	--gradient: linear-gradient(to right, #0bcb98, #0fb0c2);
+	--gradientConnect: linear-gradient(to right top, #0eb3bd, #0eb3b9);
+	--gradientConnectTop: #0eb3b9;
+	--gradientConnectBottom: #0eb3bd;
+	--point: #04c99e;
+}
+
+.step:nth-child(5) {
+	--gradient: linear-gradient(to right, #0cb8b3, #1998d7);
+	--gradientConnect: linear-gradient(to right bottom, #189cd3, #18a0cf);
+	--gradientConnectTop: #189cd3;
+	--gradientConnectBottom: #18a0cf;
+	--point: #1a91d9;
+}
+
+.step:nth-child(6) {
+	--gradient: linear-gradient(to right, #129ed1, #299be2);
+	--gradientConnect: linear-gradient(to top, #42ce87, #1991dd);
+	--point: #1b90db;
+}
